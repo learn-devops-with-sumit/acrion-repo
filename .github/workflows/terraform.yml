@@ -1,0 +1,26 @@
+name: Terraform CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main  # Run when you push code to the 'main' branch
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest  # Use Ubuntu to run the job
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2  # Pull the code from the repository
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1  # Install Terraform
+
+    - name: Initialize Terraform
+      run: terraform init  # Initialize Terraform
+
+    - name: Validate Terraform Code
+      run: terraform validate  # Check if there are errors in your Terraform code
+
+    - name: Apply Terraform Changes
+      run: terraform apply -auto-approve  # Automatically apply the changes to your cloud
